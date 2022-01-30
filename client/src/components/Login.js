@@ -29,12 +29,6 @@ export default class Login extends Component {
         user: user,
         isLoggedIn: isLoggedIn
     });
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("isLoggedIn");
-    // this.setState({
-    //     user: undefined,
-    //     isLoggedIn: false
-    // });
   }
   handleChange = (event, field) => {
     this.setState({
@@ -56,11 +50,11 @@ export default class Login extends Component {
       data: obj,
     })
       .then((result) => {
-        localStorage.setItem("user", JSON.stringify(result.data.user.email));
+        localStorage.setItem("user", JSON.stringify(result.data.user));
         localStorage.setItem("isLoggedIn", true);
-        console.log(result.data);
+        // console.log(result.data);
         this.setState({
-          user: result.data.user.email,
+          user: result.data.user,
           isLoggedIn: true,
           loginError: undefined,
         });
@@ -148,7 +142,7 @@ export default class Login extends Component {
                           <p><Link to="/signup">Forgot password?</Link></p>
                             <p>
                             Don't have an account? {" "}
-                              <Link to="/signup">Sign In</Link>{" "}
+                              <Link to="/signup">Sign Up</Link>{" "}
                             </p>
                           </div>
                         </div>

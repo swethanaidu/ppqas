@@ -9,17 +9,37 @@ const UserSchema = new Schema(
     {
         email: {
             type: String,
-            required: true
+            required: true, 
+            unique: true
         },
         password: {
             type: String,
             required: true
         },
-        name: {
+        firstName: {
             type: String,
             required: true
         },
-        
+        lastName: {
+            type: String,
+            required: true
+        },
+        role: {
+            type: String,
+            required: true
+        },
+        totalExp: {
+            type: Number,
+            required: true
+        },
+        company: {
+            type: String,
+            // required: true
+        },
+        doj: {
+            type: String,
+            // required: true
+        },
     }
 );
 

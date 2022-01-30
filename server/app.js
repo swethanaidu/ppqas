@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const config = require('config');
 const routes = require('./Routes');
 
 const port =  5454;
 const app = express();
+
+//DB config
+const db = config.get('mongoURI');
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -21,7 +25,7 @@ app.use('/', routes);
 
 // connnect to MongoDBabcdefgh
 mongoose.connect(
-    'mongodb+srv://mdb-dev-user:mdbusr0123@mdbc-dev.ilycx.mongodb.net/ppqa-data?retryWrites=true&w=majority',
+    db,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

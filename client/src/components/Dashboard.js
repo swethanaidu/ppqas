@@ -7,12 +7,8 @@ export default class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
-            // email: '',
-            // password: '',
-            // lastName: '',
             user: undefined,
             isLoggedIn: false,
-            // loginError: undefined,
         };
     }
 

@@ -5,6 +5,9 @@ cd server
 touch index.js
 npm i express nodemon cors
 ===> add "start": "nodemon index.js" under scriptss
+//Updated
+npm i jsonwebtoken
+npm i bcryptjs config
 
 npm start // to run server
 
@@ -12,7 +15,9 @@ termial 2
 ---------
 npx create-react-app client
 cd client 
-npm start //to start 
 
 npm i react-router-dom bootstrap
 npm install -s node-sass
+npm install  react-bootstrap  --save //Updated
+
+npm start //to start 

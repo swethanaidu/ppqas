@@ -1,0 +1,4 @@
+{
+    "mongoURI" : "mongodb+srv://mdb-dev-user:mdbusr0123@mdbc-dev.ilycx.mongodb.net/ppqa-data?retryWrites=true&w=majority",
+    "jwtSecret" : "ppqa_ourJwtSecret"
+}
