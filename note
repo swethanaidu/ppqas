@@ -4,10 +4,14 @@ mkdir server
 cd server
 touch index.js
 npm i express nodemon cors
-===> add "start": "nodemon index.js" under scriptss
-//Updated
+===> add "start": "nodemon index.js" under scripts
+
+//Updated v1
 npm i jsonwebtoken
 npm i bcryptjs config
+
+//Updated v2
+ 
 
 npm start // to run server
 
@@ -20,4 +24,23 @@ npm i react-router-dom bootstrap
 npm install -s node-sass
 npm install  react-bootstrap  --save //Updated
 
+
+ //new installations
+npm install reactstrap react-transition-group
+npm i uuid // will remove in future -- added only for practice 
+
+npm i redux react-redux redux-thunk
+npm install react-icons --save
+
 npm start //to start 
+
+git commands
+============
+git init
+git clone https://github.com/swethanaidu/ppqas.git //project clone in local
+git pull origin main //to pull updated code & main is out master branch 
+git branch branch1 // to create branch
+git add . // to add all files
+git add file_name // to add particular file to stage
+git commit -m "first commit" // add commit 
+git push origin main // to push code to main

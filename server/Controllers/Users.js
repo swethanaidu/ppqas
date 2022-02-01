@@ -40,11 +40,16 @@ exports.login = async (req, res) => {
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
-   
 };
 
 exports.signup = async (req, res) => {
-  const { email, password, firstName, lastName, role, totalExp, company, doj } = req.body;
+  const { email, password, firstName, lastName, role, totalExp, company, doj } =
+    req.body;
+  // Simple validation
+  if (!email || !password || !firstName || !lastName || !role || !totalExp) {
+    return res.status(400).json({ message: "Please enter (*)required fields" });
+  }
+
   try {
     const user = await User.findOne({ email });
     if (user) throw Error("User already exists");
@@ -87,6 +92,16 @@ exports.signup = async (req, res) => {
       },
     });
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    res.status(400).json({ message: e.message });
+  }
+};
+
+exports.getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) throw Error("User does not exist");
+    res.json(user);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
   }
 };

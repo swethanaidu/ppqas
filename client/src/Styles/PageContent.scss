@@ -1,16 +1,27 @@
 .qa-wrap {
-    padding-left: 290px;
-    width: 100%;
-    height: 100%;
+  padding-left: 20rem;
+  width: 100%;
+  height: 100%;
 }
 .qa-content {
-    width: 100%;
-    height: 100%;
-    padding: 90px 20px 15px;
-    &-wrap {
-        background: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        min-height: calc(100vh - 150px);
-    }
+  width: 100%;
+  height: 100%;
+  padding: 7rem 20px 15px;
+  &-wrap {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    min-height: calc(100vh - 250px);
+  }
+}
+
+.main-header {
+  color: #323251;
+  font-weight: 400;
+  font-size: 2rem;
+  text-indent: -1px;
+  line-height: 2;
+  position: relative;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
