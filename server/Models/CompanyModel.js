@@ -5,45 +5,29 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // we need to declare the fields present in the mongodb collection
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
+const CompanySchema = new Schema({
+  name: {
     type: String,
     required: true,
   },
-  firstName: {
+  ceo: {
     type: String,
     required: true,
   },
-  lastName: {
+  foundedYear: {
     type: String,
     required: true,
   },
-  role: {
-    type: String,
-    required: true,
-  },
-  totalExp: {
-    type: Number,
-    required: true,
-  },
-  company: {
+  no_OfEmps: {
     type: String,
     // required: true
   },
-  doj: {
+  locations: {
     type: String,
-    // required: true
-  },
-  yop: {
-    type: String,
+    // default: Date.now,
     // required: true
   },
 });
 
 // create a model using the schema, connect to MongoDB and export the model
-module.exports = mongoose.model("User", UserSchema, "USER");
+module.exports = mongoose.model("Company", CompanySchema, "Company");

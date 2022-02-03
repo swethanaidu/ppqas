@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
@@ -39,14 +39,12 @@ class Register extends Component {
       //check for register error
       if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.message });
+        this.setState({ successMsg: null });
         //console.log(error.msg);
       } else {
         this.setState({ msg: null });
+        this.setState({ successMsg: "loggedIn" });
       }
-    }
-    //If authenticated
-    if (isAuthenticated) {
-      this.resetSignUpForm();
     }
   }
 
@@ -87,6 +85,7 @@ class Register extends Component {
     };
     //Attempt to register
     this.props.register(newUser);
+    this.resetSignUpForm();
   };
   resetSignUpForm = () => {
     this.setState({
@@ -102,7 +101,7 @@ class Register extends Component {
       signUpError: undefined,
     });
     this.props.clearErrors();
-    window.location.href = "/dashboard";
+    // window.location.href = "/dashboard";
   };
 
   render() {
@@ -118,6 +117,9 @@ class Register extends Component {
       company,
       doj,
     } = this.state;
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <React.Fragment>
         <div className="page">

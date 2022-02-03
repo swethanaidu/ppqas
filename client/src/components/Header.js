@@ -14,13 +14,16 @@ class Header extends Component {
       initials: "",
     };
   }
-  componentDidMount() {}
-
   render() {
-    const { isAuthenticated, user, initials } = this.props.auth;
-    let fn, role;
+    const { isAuthenticated, user, token } = this.props.auth;
+    let fn = "",
+      role;
+
     if (user && isAuthenticated) {
-      fn = `${user.firstName.charAt(0)}` + `${user.lastName.charAt(0)}`;
+      const fname = JSON.stringify(`${user.firstName}`);
+      const lname = JSON.stringify(`${user.lastName}`);
+      //console.log(fname);
+      fn = fname.substring(1, 2) + lname.substring(1, 2);
       switch (user.role) {
         case "PO":
           role = "Placement Officer";
@@ -36,7 +39,36 @@ class Header extends Component {
           break;
       }
     }
+    // console.log(token);
+    // const exampleJWT = token;
+    // function getPayload(jwt) {
+    //   // A JWT has 3 parts separated by '.'
+    //   // The middle part is a base64 encoded JSON
+    //   // decode the base64
+    //   return atob(jwt.split(".")[1]);
+    // }
+    // const payload = getPayload(exampleJWT);
 
+    // const expiration = new Date(payload.exp);
+    // const now = new Date();
+    // const fiveMinutes = 1000 * 60 * 5;
+    // // // const timeVal = expiration.getTime() - now.getTime();
+    // // //console.log(timeVal);
+    // // var exp = payload.exp * 1000;
+    // // console.log(new Date(exp));
+
+    // if (expiration.getTime() - now.getTime() < fiveMinutes) {
+    //   console.log("JWT has expired or will expire soon");
+    // } else {
+    //   console.log("JWT is valid for more than 5 minutes", payload);
+    // }
+
+    // const decodedJwt = JSON.parse(atob(token.split(".")[1]));
+    // const timeVar = new Date(decodedJwt.exp * 1000);
+
+    // console.log(timeVar.getTime());
+    // console.log(now.getTime());
+    // console.log(now.getMinutes() - timeVar.getMinutes());
     return (
       <div className="qa-header">
         <div className="container-fluid">

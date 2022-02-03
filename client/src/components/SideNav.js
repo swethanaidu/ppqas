@@ -10,7 +10,9 @@ import {
   BiMessageAdd,
   BiTable,
   BiUserPlus,
+  BiBuilding,
 } from "react-icons/bi";
+import { FiUsers } from "react-icons/fi";
 import companyLogo from "../Assets/logo.png";
 // import { Nav, NavItem, NavLink } from "reactstrap";
 import { Nav, NavItem, NavLink } from "reactstrap";
@@ -24,7 +26,7 @@ export default class SideNav extends Component {
           <div className="qa-sideNav-head">
             <img src={companyLogo} alt="PPQAS logo" width="100px" />
           </div>
-          <div className="qa-sideNav-content">
+          <div className="qa-sideNav-content  pt-3">
             <div className="qa-sideNav-menu">
               <Nav vertical className="qa-menu">
                 <NavItem>
@@ -42,9 +44,10 @@ export default class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard/company"
                   >
-                    <BiBuildings /> Add Company
+                    <BiBuilding />
+                    Add Company
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -52,10 +55,10 @@ export default class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard/companyList"
                   >
-                    <BiCommentMinus />
-                    Remove Company
+                    <BiBuildings />
+                    View Company List
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -63,7 +66,29 @@ export default class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard/userList"
+                  >
+                    <FiUsers />
+                    View Users List
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={RRNavLink}
+                    activeClassName="active"
+                    exact
+                    to="/dashboard/questionList"
+                  >
+                    <BiTable />
+                    View Questions List
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={RRNavLink}
+                    activeClassName="active"
+                    exact
+                    to="/dashboard/ViewJuniorList"
                   >
                     <BiStreetView />
                     Convert Jr. to Sr.
@@ -74,7 +99,7 @@ export default class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard/AddJuniorProfile"
                   >
                     <BiUserPlus />
                     Create Jr. profile
@@ -100,17 +125,6 @@ export default class SideNav extends Component {
                   >
                     <BiMessageAdd />
                     Post Question
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    tag={RRNavLink}
-                    activeClassName="active"
-                    exact
-                    to="/dashboard/questionList"
-                  >
-                    <BiTable />
-                    View Questions
                   </NavLink>
                 </NavItem>
               </Nav>

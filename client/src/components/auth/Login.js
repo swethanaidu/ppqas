@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
@@ -15,6 +15,7 @@ class Login extends Component {
       email: "",
       password: "",
       msg: null,
+      successMsg: null,
     };
   }
 
@@ -30,14 +31,12 @@ class Login extends Component {
       //check for register error
       if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.message });
+        this.setState({ successMsg: null });
         //console.log(error.msg);
       } else {
+        this.setState({ successMsg: "loggedIn" });
         this.setState({ msg: null });
       }
-    }
-    //If authenticated
-    if (isAuthenticated) {
-      this.resetSignUpForm();
     }
   }
 
@@ -56,13 +55,19 @@ class Login extends Component {
     }
   };
   handleLogin = () => {
-    const { email, password } = this.state;
+    const { email, password, isAuthenticated } = this.state;
     const user = {
       email,
       password,
     };
     //Attempt to login
+
     this.props.login(user);
+    this.resetSignUpForm();
+    //If authenticated
+    // if (isAuthenticated) {
+    //   this.resetSignUpForm();
+    // }
   };
   resetSignUpForm = () => {
     this.setState({
@@ -72,11 +77,15 @@ class Login extends Component {
       signUpError: undefined,
     });
     this.props.clearErrors();
-    window.location.href = "/dashboard";
+    // window.location.href = "/dashboard";
   };
 
   render() {
-    const { password, email, msg } = this.state;
+    const { password, email, msg, isAuthenticated, successMsg } = this.state;
+    // console.log(successMsg);
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <React.Fragment>
         <div className="page">
@@ -99,6 +108,13 @@ class Login extends Component {
                             {msg ? (
                               <div className="alert alert-danger">{msg}</div>
                             ) : null}
+                            {successMsg === "loggedIn" ? (
+                              <div className="alert alert-success">
+                                Logged In Successfully!!
+                                {/* <Redirect to="/dashboard" /> */}
+                              </div>
+                            ) : null}
+
                             <div className="mb-3">
                               <label className="form-label">Email</label>
                               <input
