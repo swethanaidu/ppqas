@@ -23,6 +23,16 @@ app.use((req, res, next) => {
 // to handle the incoming requests
 app.use('/', routes);
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('../client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
+
 
 // connnect to MongoDBabcdefgh
 mongoose.connect(
@@ -43,13 +53,3 @@ mongoose.connect(
     console.log(err);
 })
 
-
-// Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('../client/build'));
-  
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-  }
