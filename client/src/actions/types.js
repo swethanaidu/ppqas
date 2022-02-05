@@ -18,6 +18,7 @@ export const ADD_COMPANY = "ADD_COMPANY";
 export const DELETE_COMPANY = "DELETE_COMPANY";
 export const COMPANIES_LOADING = "COMPANIES_LOADING";
 export const GET_USERS = "GET_USERS";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const GET_JUNIOR_USERS = "GET_JUNIOR_USERS";
 export const CONVERT_JUNIOR_USERS = "CONVERT_JUNIOR_USERS";
 export const ADD_USER = "ADD_USER";

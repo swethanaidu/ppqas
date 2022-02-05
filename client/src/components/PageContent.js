@@ -8,6 +8,7 @@ import CompanyForm from "./company/Company";
 import AddJuniorProfile from "./users/AddJunior";
 import JuniorList from "./users/JuniorList";
 import QuestionModal from "./questions/QuestionModal";
+import QuestionForm from "./questions/QuestionForm";
 import { Container } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./Dashboard";
@@ -36,6 +37,9 @@ export default class PageContent extends Component {
             </Route>
             <Route path="/dashboard/ViewJuniorList">
               <JuniorList />
+            </Route>
+            <Route path="/dashboard/PostQuestions">
+              <QuestionForm />
             </Route>
           </Switch>
           {/* <h1>Users List</h1>
