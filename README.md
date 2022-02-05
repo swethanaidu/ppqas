@@ -10,7 +10,7 @@ Terminal 1
 
 * For First Time Setup 
   - Update "package.json" (server/package.json)
-  - add "start": "nodemon app.js" under scripts tag
+  - add "start": "nodemon index.js" under scripts tag
 
 * To run the server
   - cd server
