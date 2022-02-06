@@ -11,8 +11,9 @@ npm i jsonwebtoken
 npm i bcryptjs config
 
 //Updated v2
- 
-
+ //new 
+npm i express body-parser mongoose concurrently
+npm i -D nodemon
 npm start // to run server
 
 termial 2
