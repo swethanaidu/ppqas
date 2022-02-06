@@ -7,6 +7,7 @@ import {
   JUNIOR_REGISTER_FAIL,
   GET_JUNIOR_USERS,
   CONVERT_JUNIOR_USERS,
+  GET_USER_BY_ID,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
@@ -40,6 +41,22 @@ export const getJuniorUsers = () => (dispatch) => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+
+export const getUserByID = (id) => (dispatch) => {
+  dispatch(setUsersLoading());
+  axios
+    .get(`/api/user/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_USER_BY_ID,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
 export const addUser = (user) => (dispatch, getState) => {
   axios
     .post("/api/user", user, tokenConfig(getState))

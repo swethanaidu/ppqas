@@ -12,7 +12,7 @@ import { returnErrors } from "./errorActions";
 export const getQuestions = () => (dispatch) => {
   dispatch(setQuestionsLoading());
   axios
-    .get("/getQuestions")
+    .get("/api/questions")
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
@@ -26,7 +26,7 @@ export const getQuestions = () => (dispatch) => {
 
 export const addQuestion = (question) => (dispatch, getState) => {
   axios
-    .post("/postQuestion", question, tokenConfig(getState))
+    .post("/api/question", question, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: ADD_QUESTION,

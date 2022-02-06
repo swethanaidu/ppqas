@@ -61,6 +61,18 @@ export default class SideNav extends Component {
                     View Company List
                   </NavLink>
                 </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    tag={RRNavLink}
+                    activeClassName="active"
+                    exact
+                    to="/dashboard/AddJuniorProfile"
+                  >
+                    <BiUserPlus />
+                    Create Jr. profile
+                  </NavLink>
+                </NavItem>
                 <NavItem>
                   <NavLink
                     tag={RRNavLink}
@@ -70,17 +82,6 @@ export default class SideNav extends Component {
                   >
                     <FiUsers />
                     View Users List
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    tag={RRNavLink}
-                    activeClassName="active"
-                    exact
-                    to="/dashboard/questionList"
-                  >
-                    <BiTable />
-                    View Questions List
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -99,10 +100,21 @@ export default class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/dashboard/AddJuniorProfile"
+                    to="/dashboard/PostQuestions"
                   >
-                    <BiUserPlus />
-                    Create Jr. profile
+                    <BiMessageAdd />
+                    Post Question
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    tag={RRNavLink}
+                    activeClassName="active"
+                    exact
+                    to="/dashboard/questionList"
+                  >
+                    <BiTable />
+                    View Questions List
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -114,17 +126,6 @@ export default class SideNav extends Component {
                   >
                     <BiCommentCheck />
                     Approve Awsners
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    tag={RRNavLink}
-                    activeClassName="active"
-                    exact
-                    to="/"
-                  >
-                    <BiMessageAdd />
-                    Post Question
                   </NavLink>
                 </NavItem>
               </Nav>

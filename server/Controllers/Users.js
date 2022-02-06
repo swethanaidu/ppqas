@@ -158,6 +158,21 @@ exports.getJuniors = async (req, res) => {
   }
 };
 
+// @route GET /user/:id
+// @desc Get User by
+// @access Public
+
+exports.getUSerByID = async (req, res) => {
+  try {
+    const users = await User.find({ _id: req.params.id });
+    if (!users) throw Error("No users");
+
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+};
+
 // @route POST /addUser
 // @desc add new USer
 // @access Private

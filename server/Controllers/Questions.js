@@ -1,5 +1,5 @@
-// import the model
 const Question = require("../Models/QuestionsModel");
+const Company = require("../Models/CompanyModel");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { jwtSecret } = config;
@@ -12,7 +12,30 @@ const { jwtSecret } = config;
 
 exports.getQuestions = async (req, res) => {
   try {
-    const questions = await Question.find();
+    const questions = await Question.aggregate([
+      {
+        $lookup: {
+          from: "Company",
+          localField: "company_id",
+          foreignField: "_id",
+          as: "Company_data",
+        },
+      },
+      {
+        $unwind: "$Company_data",
+      },
+      {
+        $lookup: {
+          from: "USER",
+          localField: "user",
+          foreignField: "_id",
+          as: "user_data",
+        },
+      },
+      {
+        $unwind: "$user_data",
+      },
+    ]);
     if (!questions) throw Error("No questions");
 
     res.status(200).json(questions);
@@ -21,12 +44,26 @@ exports.getQuestions = async (req, res) => {
   }
 };
 
-// @route POST /postQuestion
-// @desc add  question
+// exports.getQuestions = async (req, res) => {
+//   try {
+//     const questions = await Question.find();
+//     if (!questions) throw Error("No questions");
+
+//     res.status(200).json(questions);
+//   } catch (e) {
+//     res.status(400).json({ msg: e.message });
+//   }
+// };
+
+// @route POST /post/question
+// @desc post question
 // @access Public
 
 exports.postQuestion = async (req, res) => {
   const newQuestion = new Question({
+    user: req.body.user,
+    name: req.body.name,
+    company_id: req.body.company_id,
     title: req.body.title,
     desc: req.body.desc,
   });

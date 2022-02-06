@@ -11,8 +11,9 @@ npm i jsonwebtoken
 npm i bcryptjs config
 
 //Updated v2
- 
-
+ //new 
+npm i express body-parser mongoose concurrently
+npm i -D nodemon
 npm start // to run server
 
 termial 2
@@ -31,6 +32,10 @@ npm i uuid // will remove in future -- added only for practice
 
 npm i redux react-redux redux-thunk
 npm install react-icons --save
+npm install date-fns
+npm install http-server
+npm i -D --save-exact mini-css-extract-plugin@2.4.5
+
 
 npm start //to start 
 

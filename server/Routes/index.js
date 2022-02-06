@@ -17,11 +17,12 @@ router.get("/api/user", userController.getAllUsers);
 router.get("/api/user/role", userController.getJuniors);
 router.post("/api/user", auth, userController.addJr);
 router.delete("/api/user/:id", auth, userController.deleteUser);
-router.put("/api/user/:id", userController.convertToSr);
+router.put("/api/user/:id", auth, userController.convertToSr);
+router.get("/api/user/:id", userController.getUSerByID);
 
 //Questions Routes
-router.get("/getQuestions", questionsController.getQuestions);
-router.post("/postQuestion", auth, questionsController.postQuestion);
+router.get("/api/questions", questionsController.getQuestions);
+router.post("/api/question", auth, questionsController.postQuestion);
 router.delete("/deleteQuestion/:id", auth, questionsController.deleteQuestion);
 
 //Company Routes
@@ -29,4 +30,5 @@ router.get("/api/company", companyController.getCompanies);
 router.post("/api/company", auth, companyController.addCompany);
 router.delete("/api/company/:id", auth, companyController.deleteComapany);
 
+router.get("/api/ques", function (req, res, next) {});
 module.exports = router;

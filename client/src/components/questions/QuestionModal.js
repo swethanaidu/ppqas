@@ -44,7 +44,7 @@ class QuestionModal extends Component {
     return (
       <div>
         <Button
-          color="dark"
+          color="primary"
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}
         >

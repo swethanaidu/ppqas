@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Logout from "./auth/Logout";
 import "../Styles/Header.scss";
-
+import GetInitials from "./shared/GetInitials";
+import GetRole from "./shared/GetRole";
 class Header extends Component {
   static proprTypes = {
     auth: PropTypes.object.isRequired,
@@ -16,29 +17,7 @@ class Header extends Component {
   }
   render() {
     const { isAuthenticated, user, token } = this.props.auth;
-    let fn = "",
-      role;
 
-    if (user && isAuthenticated) {
-      const fname = JSON.stringify(`${user.firstName}`);
-      const lname = JSON.stringify(`${user.lastName}`);
-      //console.log(fname);
-      fn = fname.substring(1, 2) + lname.substring(1, 2);
-      switch (user.role) {
-        case "PO":
-          role = "Placement Officer";
-          break;
-        case "FC":
-          role = "Faculty";
-          break;
-        case "SR":
-          role = "Senior";
-          break;
-        case "JR":
-          role = "Junior";
-          break;
-      }
-    }
     // console.log(token);
     // const exampleJWT = token;
     // function getPayload(jwt) {
@@ -80,12 +59,16 @@ class Header extends Component {
               data-bs-display="static"
               aria-expanded="false"
             >
-              <span className="user-avatar mr-3">{fn}</span>
+              {user && isAuthenticated ? (
+                <GetInitials fn={`${user.firstName}`} ln={`${user.lastName}`} />
+              ) : (
+                ""
+              )}
               <span className="profile-info">
                 {user && isAuthenticated
                   ? user.firstName + " " + user.lastName
                   : ""}
-                <span className="sub-title">{role}</span>
+                {user && isAuthenticated ? <GetRole rl={`${user.role}`} /> : ""}
               </span>
             </button>
             <ul className="dropdown-menu dropdown-menu-lg-end">
