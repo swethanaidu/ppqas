@@ -9,6 +9,9 @@ import GetInitials from "../shared/GetInitials";
 import GetFormatedDate from "../shared/GetFormatedDate";
 import "../../Styles/QuestionsStyles.scss";
 import { AiOutlineComment } from "react-icons/ai";
+import { Nav, NavItem, NavLink } from "reactstrap";
+import { Link } from "react-router-dom";
+import { NavLink as RRNavLink } from "react-router-dom";
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -49,37 +52,45 @@ class QuestionList extends Component {
             }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <div className="text-wrap">
-                  <div className="question-detial">
-                    <div className="media d-block ">
-                      <div className="media-body">
-                        <h5 className="mg-b-5 tx-inverse">{title}</h5>
-                        <div className="d-sm-flex">
-                          {user_data && (
-                            <GetInitials
-                              fn={`${user_data.firstName}`}
-                              ln={`${user_data.lastName}`}
-                            />
-                          )}
-                          <div className="profile">
-                            {name}
-                            <GetFormatedDate date={dop}></GetFormatedDate>
+                  <Link
+                    to={{
+                      pathname: "/dashboard/questionDetails",
+                      value: { _id },
+                    }}
+                  >
+                    <div className="question-detial">
+                      <div className="media d-block ">
+                        <div className="media-body">
+                          <h5 className="mg-b-5 tx-inverse">{title}</h5>
+                          <div className="d-sm-flex">
+                            {user_data && (
+                              <GetInitials
+                                fn={`${user_data.firstName}`}
+                                ln={`${user_data.lastName}`}
+                              />
+                            )}
+                            <div className="profile">
+                              {name}
+                              <GetFormatedDate date={dop}></GetFormatedDate>
+                            </div>
                           </div>
-                        </div>
-                        {/* <p>{desc}</p> */}
-                        <div className="company-badge">
-                          {comments.length > 0 && (
-                            <span class="badge bg-light" color="dark">
-                              <AiOutlineComment /> {comments.length}
+                          {/* <p>{desc}</p> */}
+                          <div className="company-badge">
+                            {comments.length > 0 && (
+                              <span class="badge bg-light" color="dark">
+                                <AiOutlineComment /> {comments.length}
+                              </span>
+                            )}
+                            <span className="badge bg-success ">
+                              {Company_data.name}
                             </span>
-                          )}
-                          <span className="badge bg-success ">
-                            {Company_data.name}
-                          </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
+
                 {/* <tr>
                     <td>{_id}</td>
                     <td>{title}</td>

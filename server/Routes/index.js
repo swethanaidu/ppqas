@@ -22,7 +22,9 @@ router.get("/api/user/:id", userController.getUSerByID);
 
 //Questions Routes
 router.get("/api/questions", questionsController.getQuestions);
+router.get("/api/questions/:id", questionsController.getQuestionByID);
 router.post("/api/question", auth, questionsController.postQuestion);
+router.post("/api/comment/:id", questionsController.postComment);
 router.delete("/deleteQuestion/:id", auth, questionsController.deleteQuestion);
 
 //Company Routes

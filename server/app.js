@@ -23,19 +23,21 @@ app.use((req, res, next) => {
 // to handle the incoming requests
 app.use("/", routes);
 
-/*
- * In production mode we will also serve the client
- */
+// // Serve static files from the React frontend app
+// app.use(express.static(path.join(__dirname, "../client/build")));
+// // Anything that doesn't match the above, send back index.html
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/../client/build/index.html"));
+// });
+
+// Serve client
 if (process.env.NODE_ENV === "production") {
-  console.log(`Production mode detected: Serving client`);
-  const path = require("path");
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, "../client/build")));
 
-  const buildDir = path.join(__dirname, "../client/build");
-
-  app.use(express.static(buildDir));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(buildDir, "index.html"));
+  // FIX: below code fixes app crashing on refresh in deployment
+  app.get("*", (_, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 }
 
