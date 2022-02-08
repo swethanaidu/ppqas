@@ -49,7 +49,7 @@ class CommentForm extends Component {
             <FormGroup>
               <div className="row">
                 <div className="col-lg-12">
-                  <Label for="text">Comment</Label>
+                  {/* <Label for="text">Comment</Label> */}
                   <Input
                     type="textarea"
                     name="text"
