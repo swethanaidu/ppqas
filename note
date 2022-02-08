@@ -1,20 +1,24 @@
 termial 1
 ---------
-mkdir server
-cd server
-touch index.js
-npm i express nodemon cors
+//mkdir server
+//cd server
+//touch index.js
+//npm i express nodemon cors
 ===> add "start": "nodemon index.js" under scripts
 
 //Updated v1
-npm i jsonwebtoken
-npm i bcryptjs config
 
-//Updated v2
+
+//Updated version 2 - run code in root folder
  //new 
 npm i express body-parser mongoose concurrently
 npm i -D nodemon
-npm start // to run server
+npm i jsonwebtoken
+npm i bcryptjs config
+npm start  // to run server
+npm start server // to run nodemon server
+npm start client // to run client - reactjs
+npm start dev // to run concurrently both (nodemon server) & (client - reactjs)
 
 termial 2
 ---------
