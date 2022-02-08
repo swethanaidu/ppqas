@@ -4,6 +4,7 @@ import {
   ADD_QUESTION,
   DELETE_QUESTION,
   QUESTIONS_LOADING,
+  ADD_COMMENT,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
@@ -23,6 +24,20 @@ export const getQuestions = () => (dispatch) => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+export const getQuestionByID = (id) => (dispatch) => {
+  dispatch(setQuestionsLoading());
+  axios
+    .get(`/api/questions/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
 
 export const addQuestion = (question) => (dispatch, getState) => {
   axios
@@ -30,6 +45,20 @@ export const addQuestion = (question) => (dispatch, getState) => {
     .then((res) =>
       dispatch({
         type: ADD_QUESTION,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const addComment = (postId, formData) => (dispatch, getState) => {
+  axios
+    .post(`/api/comment/${postId}`, formData, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: ADD_COMMENT,
         payload: res.data,
       })
     )
