@@ -17,10 +17,10 @@ class QuestionList extends Component {
   componentDidMount() {
     this.props.getQuestions();
   }
-  onDeleteClick = (id) => {
-    //console.log(id);
-    this.props.deleteQuestion(id);
-  };
+  // onDeleteClick = (id) => {
+  //   //console.log(id);
+  //   this.props.deleteQuestion(id);
+  // };
   render() {
     // this.props.question.questions;
     const { questions } = this.props.question;
@@ -31,14 +31,7 @@ class QuestionList extends Component {
           {questions.map((question) => (
             <CSSTransition key={question._id} timeout={500} classNames="fade">
               <div className="text-wrap">
-                <Link
-                  to={{
-                    pathname: "/dashboard/questionDetails",
-                    value: question._id,
-                  }}
-                >
-                  <QuestionItem question={question} questionPage={false} />
-                </Link>
+                <QuestionItem question={question} questionPage={false} />
               </div>
             </CSSTransition>
           ))}

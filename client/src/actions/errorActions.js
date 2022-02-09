@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, CLEAR_ERRORS } from "./types";
+import { GET_ERRORS, CLEAR_ERRORS, GET_SUCCESS_MSG } from "./types";
 // import { IMsg } from '../../types/interfaces';
 
 // RETURN ERRORS

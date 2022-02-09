@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addComment } from "../../actions/questionActions";
 import { getCompanies } from "../../actions/companyActions";
+import { clearErrors } from "../../actions/errorActions";
 class CommentForm extends Component {
   static proprTypes = {
     auth: PropTypes.object.isRequired,
+    clearErrors: PropTypes.object.isRequired,
   };
   state = {
     modal: false,
@@ -35,17 +37,25 @@ class CommentForm extends Component {
     };
     // Add ques vio addComment action
     this.props.addComment(posId, newComment);
-    //this.toggle(); //close modal
+    this.resetForm();
   };
-
+  resetForm = () => {
+    this.setState({
+      text: "",
+      msg: "",
+    });
+    this.props.clearErrors();
+    // window.location.href = "/dashboard";
+  };
   render() {
     const { companies } = this.props.company;
+    const { text } = this.state;
     // console.log(`${this.props.post_id}`);
     return (
       <>
         <h5 className="main-header1">Post Your Comments</h5>
         <div>
-          <Form onSubmit={this.onSubmit}>
+          <Form onSubmit={this.onSubmit.bind(this)}>
             <FormGroup>
               <div className="row">
                 <div className="col-lg-12">
@@ -57,6 +67,7 @@ class CommentForm extends Component {
                     cols="30"
                     rows="5"
                     placeholder=""
+                    value={text}
                     onChange={(event) => this.handleChange(event, "text")}
                   />
                 </div>
@@ -79,6 +90,8 @@ const mapStateToProps = (state) => ({
   // isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { getCompanies, addComment })(
-  CommentForm
-);
+export default connect(mapStateToProps, {
+  getCompanies,
+  addComment,
+  clearErrors,
+})(CommentForm);

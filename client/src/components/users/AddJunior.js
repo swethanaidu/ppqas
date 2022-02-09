@@ -12,14 +12,9 @@ class AddJunior extends Component {
     lastName: "",
     email: "",
     yop: "",
-    successMsg: "",
     msg: "",
   };
-  // toggle = () => {
-  //   this.setState({
-  //     modal: !this.state.modal,
-  //   });
-  // };
+
   static proprTypes = {
     error: PropTypes.object.isRequired,
     clearErrors: PropTypes.func.isRequired,
@@ -30,11 +25,8 @@ class AddJunior extends Component {
       //check for register error
       if (error.id === "JUNIOR_REGISTER_FAIL") {
         this.setState({ msg: error.msg.message });
-        this.setState({ successMsg: null });
-        //console.log(error.msg);
       } else {
         this.setState({ msg: null });
-        this.setState({ successMsg: "loggedIn" });
       }
     }
   }
@@ -57,12 +49,9 @@ class AddJunior extends Component {
     // Add company via addUser action
     this.props.addUser(newUser);
     this.resetSignUpForm();
-    //console.log(status);
-    // this.toggle(); //close modal
   };
   resetSignUpForm = () => {
     this.setState({
-      // isSignUpModalOpen: false,
       firstName: "",
       lastName: "",
       email: "",
@@ -74,24 +63,13 @@ class AddJunior extends Component {
   };
 
   render() {
-    const { msg, successMsg } = this.state;
+    const { msg, firstName, lastName, email, yop } = this.state;
     return (
       <div>
         <h3 className="main-header">Create Junior Profile</h3>
         <div className="qa-content-wrap">
-          {/* <Button
-            color="dark"
-            style={{ marginBottom: "2rem" }}
-            onClick={this.toggle}
-          >
-            Add Question
-          </Button> */}
-          {msg ? <div className="alert alert-danger">{msg}</div> : null}
-          {successMsg ? (
-            <div className="alert alert-success">
-              Junior Profile has been added successfully!
-            </div>
-          ) : null}
+          {msg ? <div className="alert alert-danger">{msg}</div> : ""}
+
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               <div className="row">
@@ -102,6 +80,7 @@ class AddJunior extends Component {
                     name="firstName"
                     id="firstName"
                     placeholder=""
+                    value={firstName}
                     onChange={(event) => this.handleChange(event, "firstName")}
                   />
                 </div>
@@ -112,6 +91,7 @@ class AddJunior extends Component {
                     name="lastName"
                     id="lastName"
                     placeholder=""
+                    value={lastName}
                     onChange={(event) => this.handleChange(event, "lastName")}
                   />
                 </div>
@@ -124,6 +104,7 @@ class AddJunior extends Component {
                     name="email"
                     id="email"
                     placeholder=""
+                    value={email}
                     onChange={(event) => this.handleChange(event, "email")}
                   />
                 </div>
@@ -135,13 +116,14 @@ class AddJunior extends Component {
                     name="yop"
                     id="yop"
                     placeholder=""
+                    value={yop}
                     onChange={(event) => this.handleChange(event, "yop")}
                   />
                 </div>
               </div>
 
               <div className="row">
-                <div className="col-lg-3 mb-3">
+                <div className="col-lg-3">
                   <Button
                     color="primary"
                     className="btn"

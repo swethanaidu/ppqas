@@ -8,6 +8,7 @@ import {
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
+import { setAlert } from "./alert";
 // import { IItem } from '../../types/interfaces';
 
 export const getQuestions = () => (dispatch) => {
@@ -42,11 +43,13 @@ export const getQuestionByID = (id) => (dispatch) => {
 export const addQuestion = (question) => (dispatch, getState) => {
   axios
     .post("/api/question", question, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: ADD_QUESTION,
-        payload: res.data,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: ADD_QUESTION,
+          payload: res.data,
+        }),
+      dispatch(setAlert(`Posted Question Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -56,11 +59,14 @@ export const addQuestion = (question) => (dispatch, getState) => {
 export const addComment = (postId, formData) => (dispatch, getState) => {
   axios
     .post(`/api/comment/${postId}`, formData, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: ADD_COMMENT,
-        payload: res.data,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: ADD_COMMENT,
+          payload: res.data,
+        }),
+
+      dispatch(setAlert(`Posted Comment Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -70,11 +76,13 @@ export const addComment = (postId, formData) => (dispatch, getState) => {
 export const deleteQuestion = (id) => (dispatch, getState) => {
   axios
     .delete(`/deleteQuestion/${id}`, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: DELETE_QUESTION,
-        payload: id,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: DELETE_QUESTION,
+          payload: id,
+        }),
+      dispatch(setAlert(`Deleted Question Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))

@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { addCompany } from "../../actions/companyActions";
-
+import { clearErrors } from "../../actions/errorActions";
+import Message from "../shared/Message";
 class CompanyForm extends Component {
   state = {
     // modal: false,
@@ -20,16 +13,32 @@ class CompanyForm extends Component {
     foundedYear: "",
     no_OfEmps: "",
     locations: "",
+    msg: undefined,
+    loading: "",
   };
-  // toggle = () => {
-  //   this.setState({
-  //     modal: !this.state.modal,
-  //   });
-  // };
+  static proprTypes = {
+    isAuthenticated: PropTypes.bool,
+    loading: PropTypes.bool,
+    message: PropTypes.string,
+    error: PropTypes.object.isRequired,
+    clearErrors: PropTypes.object.isRequired,
+  };
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      //check for register error
+      if (error.id === "COMPANY_ADD_FAIL") {
+        this.setState({ msg: error.msg.message });
+        //console.log(error.msg);
+      } else {
+        this.setState({ msg: undefined });
+      }
+    }
+  }
   handleChange = (event, field) => {
     this.setState({
       [field]: event.target.value,
-      //   loginError: undefined,
+      // msg: undefined,
     });
   };
   onSubmit = (e) => {
@@ -42,12 +51,31 @@ class CompanyForm extends Component {
       locations: this.state.locations,
     };
     // Add company via addCompany action
-    const status = this.props.addCompany(newCompany);
-    console.log(status);
+    this.props.addCompany(newCompany);
+
+    this.resetForm();
+
+    // console.log(status);
     // this.toggle(); //close modal
+  };
+  resetForm = () => {
+    this.setState({
+      name: "",
+      ceo: "",
+      foundedYear: "",
+      no_OfEmps: "",
+      locations: "",
+      msg: "",
+    });
+    this.props.clearErrors();
+    // window.location.href = "/dashboard";
   };
 
   render() {
+    const { msg, name, ceo, foundedYear, no_OfEmps, locations } = this.state;
+    const { loading } = this.props.company;
+    //console.log(loading);
+    // console.log(msg);
     return (
       <div>
         <h3 className="main-header">Company Form</h3>
@@ -59,6 +87,9 @@ class CompanyForm extends Component {
           >
             Add Question
           </Button> */}
+          {msg && <Message variant="danger">{msg}</Message>}
+
+          {loading ? "Looooading......" : ""}
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               <div className="row">
@@ -68,7 +99,8 @@ class CompanyForm extends Component {
                     type="text"
                     name="name"
                     id="name"
-                    placeholder="Add Name"
+                    value={name}
+                    placeholder=""
                     onChange={(event) => this.handleChange(event, "name")}
                   />
                 </div>
@@ -78,7 +110,8 @@ class CompanyForm extends Component {
                     type="text"
                     name="ceo"
                     id="ceo"
-                    placeholder="Add CEO"
+                    value={ceo}
+                    placeholder=""
                     onChange={(event) => this.handleChange(event, "ceo")}
                   />
                 </div>
@@ -90,7 +123,8 @@ class CompanyForm extends Component {
                     type="text"
                     name="foundedYear"
                     id="foundedYear"
-                    placeholder="Add Founded Year"
+                    placeholder=""
+                    value={foundedYear}
                     onChange={(event) =>
                       this.handleChange(event, "foundedYear")
                     }
@@ -103,7 +137,8 @@ class CompanyForm extends Component {
                     type="text"
                     name="no_OfEmps"
                     id="no_OfEmps"
-                    placeholder="Add Total no. of Employees"
+                    value={no_OfEmps}
+                    placeholder=""
                     onChange={(event) => this.handleChange(event, "no_OfEmps")}
                   />
                 </div>
@@ -114,8 +149,9 @@ class CompanyForm extends Component {
                   <Input
                     type="text"
                     name="locations"
+                    value={locations}
                     id="locations"
-                    placeholder="Add Locations"
+                    placeholder=""
                     onChange={(event) => this.handleChange(event, "locations")}
                   />
                 </div>
@@ -142,7 +178,12 @@ class CompanyForm extends Component {
 
 const mapStateToProps = (state) => ({
   company: state.company,
+  loading: state.company.loading,
+  message: state.company.message,
+  error: state.error,
   // isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { addCompany })(CompanyForm);
+export default connect(mapStateToProps, { addCompany, clearErrors })(
+  CompanyForm
+);

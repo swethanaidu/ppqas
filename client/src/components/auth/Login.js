@@ -82,8 +82,8 @@ class Login extends Component {
 
   render() {
     const { password, email, msg, isAuthenticated, successMsg } = this.state;
-    // console.log(successMsg);
-    if (this.props.isAuthenticated) {
+    //console.log(this.props.auth.token);
+    if (this.props.auth.token) {
       return <Redirect to="/dashboard" />;
     }
     return (
@@ -170,6 +170,7 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   // question: state.question,
   isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   error: state.error,
 });
 

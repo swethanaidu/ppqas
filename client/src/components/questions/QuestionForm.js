@@ -4,15 +4,17 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addQuestion } from "../../actions/questionActions";
 import { getCompanies } from "../../actions/companyActions";
+import { clearErrors } from "../../actions/errorActions";
 class QuestionForm extends Component {
   static proprTypes = {
     auth: PropTypes.object.isRequired,
+    clearErrors: PropTypes.object.isRequired,
   };
   state = {
     modal: false,
     title: "",
     desc: "",
-    company_id: null,
+    company_id: "",
   };
   componentDidMount() {
     this.props.getCompanies();
@@ -37,10 +39,20 @@ class QuestionForm extends Component {
     // Add ques vio addQuestion action
     this.props.addQuestion(newQuestion);
     //this.toggle(); //close modal
+    this.resetForm();
   };
-
+  resetForm = () => {
+    this.setState({
+      title: "",
+      desc: "",
+      company_id: "",
+    });
+    this.props.clearErrors();
+    // window.location.href = "/dashboard";
+  };
   render() {
     const { companies } = this.props.company;
+    const { title, desc, company_id } = this.state;
     return (
       <>
         <h3 className="main-header">Post Your Question</h3>
@@ -56,6 +68,7 @@ class QuestionForm extends Component {
                       name="company_id"
                       className="mb-3"
                       type="select"
+                      value={company_id}
                       onChange={(event) =>
                         this.handleChange(event, "company_id")
                       }
@@ -76,6 +89,7 @@ class QuestionForm extends Component {
                     id="title"
                     className="mb-3"
                     placeholder=""
+                    value={title}
                     onChange={(event) => this.handleChange(event, "title")}
                   />
 
@@ -86,6 +100,7 @@ class QuestionForm extends Component {
                     id="desc"
                     cols="30"
                     rows="5"
+                    value={desc}
                     placeholder=""
                     onChange={(event) => this.handleChange(event, "desc")}
                   />
@@ -109,6 +124,8 @@ const mapStateToProps = (state) => ({
   // isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { getCompanies, addQuestion })(
-  QuestionForm
-);
+export default connect(mapStateToProps, {
+  getCompanies,
+  addQuestion,
+  clearErrors,
+})(QuestionForm);

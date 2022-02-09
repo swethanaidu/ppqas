@@ -137,3 +137,16 @@ code {
   font-size: 12px;
   display: block;
 }
+
+.alert-wrapper-main {
+  .alert {
+    z-index: 9999;
+    top: 0;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+}

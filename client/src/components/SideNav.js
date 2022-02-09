@@ -70,7 +70,7 @@ class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard"
                   >
                     <BiHome /> Dashboard
                   </NavLink>
@@ -190,7 +190,7 @@ class SideNav extends Component {
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
-                    to="/"
+                    to="/dashboard"
                   >
                     <BiCommentCheck />
                     Approve Awsners

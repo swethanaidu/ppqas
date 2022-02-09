@@ -117,7 +117,7 @@ class Register extends Component {
       company,
       doj,
     } = this.state;
-    if (this.props.isAuthenticated) {
+    if (this.props.auth.token) {
       return <Redirect to="/dashboard" />;
     }
     return (
@@ -292,6 +292,7 @@ class Register extends Component {
 const mapStateToProps = (state) => ({
   // question: state.question,
   isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   error: state.error,
 });
 

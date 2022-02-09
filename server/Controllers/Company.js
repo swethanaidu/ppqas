@@ -26,6 +26,14 @@ exports.getCompanies = async (req, res) => {
 // @access Public
 
 exports.addCompany = async (req, res) => {
+  const { name, ceo, foundedYear, no_OfEmps, locations } = req.body;
+  // Simple validation
+  if (!name || !ceo || !foundedYear) {
+    return res
+      .status(400)
+      .json({ message: "Please enter (*) required fields" });
+  }
+
   const newCompany = new Comapany({
     name: req.body.name,
     ceo: req.body.ceo,

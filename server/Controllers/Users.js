@@ -63,7 +63,9 @@ exports.signup = async (req, res) => {
   } = req.body;
   // Simple validation
   if (!email || !password || !firstName || !lastName || !role || !totalExp) {
-    return res.status(400).json({ message: "Please enter (*)required fields" });
+    return res
+      .status(400)
+      .json({ message: "Please enter (*) required fields" });
   }
 
   try {

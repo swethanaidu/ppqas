@@ -8,10 +8,10 @@ export default class Router extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Route path="/" exact component={Dashboard} />
+          <Route path="/" exact component={Login} />
+          <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/signup" component={Register} />
-          <Route path="/login" component={Login} />
         </BrowserRouter>
       </div>
     );

@@ -11,7 +11,7 @@ import {
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
-// import { IItem } from '../../types/interfaces';
+import { setAlert } from "./alert";
 
 export const getAllUsers = () => (dispatch) => {
   dispatch(setUsersLoading());
@@ -60,11 +60,13 @@ export const getUserByID = (id) => (dispatch) => {
 export const addUser = (user) => (dispatch, getState) => {
   axios
     .post("/api/user", user, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: ADD_USER,
-        payload: res.data,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: ADD_USER,
+          payload: res.data,
+        }),
+      dispatch(setAlert(`Added Junior Profile Successfully!!`, "success"))
     )
     .catch((err) => {
       dispatch(
@@ -83,11 +85,13 @@ export const addUser = (user) => (dispatch, getState) => {
 export const deleteUser = (id) => (dispatch, getState) => {
   axios
     .delete(`/api/user/${id}`, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: DELETE_USER,
-        payload: id,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: DELETE_USER,
+          payload: id,
+        }),
+      dispatch(setAlert(`Deleted User Profile Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -97,11 +101,15 @@ export const deleteUser = (id) => (dispatch, getState) => {
 export const convertJrUser = (id) => (dispatch, getState) => {
   axios
     .put(`/api/user/${id}`, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: CONVERT_JUNIOR_USERS,
-        payload: id,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: CONVERT_JUNIOR_USERS,
+          payload: id,
+        }),
+      dispatch(
+        setAlert(`Converted Junior to Senior Profile Successfully!!`, "success")
+      )
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))

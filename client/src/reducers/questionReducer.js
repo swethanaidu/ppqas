@@ -18,6 +18,7 @@ const initialState = {
 //   }
 
 export default function (state = initialState, action) {
+  const { payload } = action;
   switch (action.type) {
     case GET_QUESTIONS:
       return {
@@ -40,7 +41,7 @@ export default function (state = initialState, action) {
     case ADD_COMMENT:
       return {
         ...state,
-        question: [action.payload, ...state.comments],
+        question: { comments: payload, ...state.question },
       };
     case QUESTIONS_LOADING:
       return {
