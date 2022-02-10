@@ -42,7 +42,7 @@ const QuestionItem = ({
             ) : (
               ""
             )}
-            <span className="badge bg-success ">{Company_data.name}</span>
+            <span className="badge bg-light ">{Company_data.name}</span>
           </div>
         </div>
 

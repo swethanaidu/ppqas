@@ -25,6 +25,10 @@ router.get("/api/questions", questionsController.getQuestions);
 router.get("/api/questions/:id", questionsController.getQuestionByID);
 router.post("/api/question", auth, questionsController.postQuestion);
 router.post("/api/comment/:id", questionsController.postComment);
+router.delete(
+  "/api/comment/:id/:comment_id",
+  questionsController.deleteComment
+);
 router.delete("/deleteQuestion/:id", auth, questionsController.deleteQuestion);
 
 //Company Routes

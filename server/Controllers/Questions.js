@@ -141,6 +141,7 @@ exports.postComment = async (req, res) => {
     };
     post.comments.unshift(newComment);
     await post.save();
+    // res.status(200).json({ success: true });
     res.json(post.comments);
   } catch (e) {
     res.status(400).json({ msg: e.message });
@@ -159,6 +160,42 @@ exports.deleteQuestion = async (req, res) => {
     const removed = await question.remove();
     if (!removed)
       throw Error("Something went wrong while trying to delete the question");
+    res.json(question.comments);
+
+    // res.status(200).json({ success: true });
+  } catch (e) {
+    res.status(400).json({ msg: e.message, success: false });
+  }
+};
+// @route DELETE /api/comment/:id/:comment_id
+// @desc delete  comment under question data
+// @access Public
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const question = await Question.findById(req.params.id);
+    if (!question) throw Error("No question found");
+
+    // Pull out comment
+    const comment = question.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    // Make sure comment exists
+    if (!comment) {
+      return res.status(404).json({ msg: "Comment does not exist" });
+    }
+    // Check user
+    // if (comment.user.toString() !== req.user.id) {
+    //   return res.status(401).json({ msg: "User not authorized" });
+    // }
+
+    question.comments = question.comments.filter(
+      ({ id }) => id !== req.params.comment_id
+    );
+
+    const removed = await question.save();
+    if (!removed)
+      throw Error("Something went wrong while trying to delete the comment");
 
     res.status(200).json({ success: true });
   } catch (e) {

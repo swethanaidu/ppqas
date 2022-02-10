@@ -1,10 +1,12 @@
 import axios from "axios";
 import {
   GET_QUESTIONS,
+  GET_QUESTION,
   ADD_QUESTION,
   DELETE_QUESTION,
   QUESTIONS_LOADING,
   ADD_COMMENT,
+  DELETE_COMMENT,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
@@ -31,7 +33,7 @@ export const getQuestionByID = (id) => (dispatch) => {
     .get(`/api/questions/${id}`)
     .then((res) =>
       dispatch({
-        type: GET_QUESTIONS,
+        type: GET_QUESTION,
         payload: res.data,
       })
     )
@@ -83,6 +85,22 @@ export const deleteQuestion = (id) => (dispatch, getState) => {
           payload: id,
         }),
       dispatch(setAlert(`Deleted Question Successfully!!`, "success"))
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const deleteComment = (id, comment_id) => (dispatch, getState) => {
+  axios
+    .delete(`/api/comment/${id}/${comment_id}`, tokenConfig(getState))
+    .then(
+      (res) =>
+        dispatch({
+          type: DELETE_COMMENT,
+          payload: comment_id,
+        }),
+      dispatch(setAlert(`Deleted Comment Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))

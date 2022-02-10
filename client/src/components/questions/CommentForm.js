@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addComment } from "../../actions/questionActions";
-import { getCompanies } from "../../actions/companyActions";
+import { addComment, getQuestionByID } from "../../actions/questionActions";
 import { clearErrors } from "../../actions/errorActions";
 class CommentForm extends Component {
   static proprTypes = {
     auth: PropTypes.object.isRequired,
+    addComment: PropTypes.func.isRequired,
     clearErrors: PropTypes.object.isRequired,
   };
   state = {
@@ -16,9 +16,9 @@ class CommentForm extends Component {
     text: "",
     company_id: null,
   };
-  componentDidMount() {
-    // this.props.getCompanies();
-  }
+  // componentDidMount() {
+  //   this.props.getQuestionByID();
+  // }
   handleChange = (event, field) => {
     this.setState({
       [field]: event.target.value,
@@ -48,7 +48,7 @@ class CommentForm extends Component {
     // window.location.href = "/dashboard";
   };
   render() {
-    const { companies } = this.props.company;
+    // const { companies } = this.props.company;
     const { text } = this.state;
     // console.log(`${this.props.post_id}`);
     return (
@@ -84,14 +84,13 @@ class CommentForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  question: state.question,
+  // question: state.question,
   auth: state.auth,
-  company: state.company,
+  // company: state.company,
   // isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, {
-  getCompanies,
   addComment,
   clearErrors,
 })(CommentForm);

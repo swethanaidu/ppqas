@@ -238,7 +238,9 @@ class Register extends Component {
                                 </div>
                                 <div className="col-lg-6 mb-3">
                                   <Form.Group controlId="doj">
-                                    <Form.Label>Select Date</Form.Label>
+                                    <Form.Label>
+                                      Select Date of Joining
+                                    </Form.Label>
                                     <Form.Control
                                       type="date"
                                       name="doj"
@@ -253,15 +255,6 @@ class Register extends Component {
                               </div>
                             )}
 
-                            {/* {this.state.showPO && (
-                              <div className="{this.state.showPO}">PO</div>
-                            )}
-                            {this.state.showFC && (
-                              <div className="{this.state.showFC}">FC</div>
-                            )}
-                            {this.state.showSR && (
-                              <div className="{this.state.showSR}">SR</div>
-                            )} */}
                             <input
                               type="button"
                               className="btn btn-primary w-100 p-3 mt-3"

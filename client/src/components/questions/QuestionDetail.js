@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-import { getQuestionByID, deleteQuestion } from "../../actions/questionActions";
-import { Link, useLocation } from "react-router-dom";
+import { getQuestionByID, deleteComment } from "../../actions/questionActions";
+import { Link, useLocation, Redirect } from "react-router-dom";
 import GetInitials from "../shared/GetInitials";
 import GetFormatedDate from "../shared/GetFormatedDate";
 import "../../Styles/QuestionsStyles.scss";
 import { VscCommentDiscussion } from "react-icons/vsc";
+import { FiTrash2 } from "react-icons/fi";
 import CommentForm from "./CommentForm";
 import PropTypes from "prop-types";
 import QuestionItem from "./QuestionItem";
@@ -17,8 +18,8 @@ const QuestionDetail = ({
   props,
   getQuestionByID,
   question,
+  deleteComment,
   isAuthenticated,
-  deleteQuestion,
 }) => {
   let Location = useLocation();
 
@@ -31,13 +32,12 @@ const QuestionDetail = ({
   // console.log(Id);
   useEffect(() => {
     getQuestionByID(Id);
-  }, [getQuestionByID]);
-
-  const handleDelete = (id) => {
-    deleteQuestion(id);
-  };
+  }, [getQuestionByID, Id]);
 
   const { questions } = question;
+  if (!Id) {
+    return <Redirect to="/dashboard/questionList" />;
+  }
   return (
     <>
       <div className="question-detial-page">
@@ -54,6 +54,7 @@ const QuestionDetail = ({
             )}
             {question.comments.length > 0 &&
               question.comments?.map((comment) => (
+                // <CommentItem key={comment._id} />
                 <div className="question-detial" key={comment._id}>
                   <div className="media d-block ">
                     <div className="media-body">
@@ -68,6 +69,36 @@ const QuestionDetail = ({
                             {comment.text}
                           </div>
                         </div>
+                      </div>
+                      <div className="actions-badge">
+                        {/* <Link
+                          to={{
+                            pathname: "/dashboard/questionDetails",
+                            value: Id,
+                          }}
+                        >
+                          <Button
+                            className="remove-btn mr-3"
+                            color="primary"
+                            size="sm"
+                            id="TooltipExample1"
+                          >
+                            Approve
+                          </Button>
+                        </Link> */}
+
+                        <Button
+                          className="remove-btn"
+                          color="danger"
+                          size="sm"
+                          id="TooltipExample"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Delete Comment"
+                          onClick={() => deleteComment(Id, comment._id)}
+                        >
+                          <FiTrash2 />
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -123,6 +154,7 @@ const QuestionDetail = ({
 QuestionDetail.propTypes = {
   question: PropTypes.object.isRequired,
   getQuestionByID: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -130,6 +162,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getQuestionByID, deleteQuestion })(
+export default connect(mapStateToProps, { getQuestionByID, deleteComment })(
   QuestionDetail
 );
