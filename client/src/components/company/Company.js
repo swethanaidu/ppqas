@@ -14,6 +14,7 @@ class CompanyForm extends Component {
     no_OfEmps: "",
     locations: "",
     msg: undefined,
+    validationMsg: undefined,
     loading: "",
   };
   static proprTypes = {
@@ -43,20 +44,23 @@ class CompanyForm extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    const newCompany = {
-      name: this.state.name,
-      ceo: this.state.ceo,
-      foundedYear: this.state.foundedYear,
-      no_OfEmps: this.state.no_OfEmps,
-      locations: this.state.locations,
-    };
-    // Add company via addCompany action
-    this.props.addCompany(newCompany);
 
-    this.resetForm();
-
-    // console.log(status);
-    // this.toggle(); //close modal
+    if (!this.validateInput()) {
+      this.setState({
+        validationMsg: "Kindly provide all mandatory fields to proceed...",
+      });
+    } else {
+      const newCompany = {
+        name: this.state.name,
+        ceo: this.state.ceo,
+        foundedYear: this.state.foundedYear,
+        no_OfEmps: this.state.no_OfEmps,
+        locations: this.state.locations,
+      };
+      // Add company via addCompany action
+      this.props.addCompany(newCompany);
+      this.resetForm();
+    }
   };
   resetForm = () => {
     this.setState({
@@ -66,28 +70,37 @@ class CompanyForm extends Component {
       no_OfEmps: "",
       locations: "",
       msg: "",
+      validationMsg: "",
     });
     this.props.clearErrors();
     // window.location.href = "/dashboard";
   };
+  validateInput() {
+    return !(
+      this.isEmpty(this.state.name) ||
+      this.isEmpty(this.state.ceo) ||
+      this.isEmpty(this.state.foundedYear) ||
+      this.isEmpty(this.state.no_OfEmps) ||
+      this.isEmpty(this.state.locations)
+    );
+  }
+
+  isEmpty = (data) => {
+    return !data || data.trim().length === 0;
+  };
 
   render() {
-    const { msg, name, ceo, foundedYear, no_OfEmps, locations } = this.state;
+    const { msg, name, ceo, foundedYear, no_OfEmps, locations, validationMsg } =
+      this.state;
     const { loading } = this.props.company;
     //console.log(loading);
-    // console.log(msg);
+    // console.log(validationMsg);
     return (
       <div>
         <h3 className="main-header">Company Form</h3>
         <div className="qa-content-wrap">
-          {/* <Button
-            color="dark"
-            style={{ marginBottom: "2rem" }}
-            onClick={this.toggle}
-          >
-            Add Question
-          </Button> */}
           {msg && <Message variant="danger">{msg}</Message>}
+          {validationMsg && <Message variant="danger">{validationMsg}</Message>}
 
           {loading ? "Looooading......" : ""}
           <Form onSubmit={this.onSubmit}>
