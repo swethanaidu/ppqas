@@ -33,10 +33,10 @@ export default function (state = initialState, action) {
         ...state,
         // users: action.payload,
         // loading: false,
-        //users: state.users.filter((user) => user._id !== action.payload),
-        users: state.users.map((user) =>
-          user._id === action.payload ? { ...user } : user
-        ),
+        users: state.users.filter((user) => user._id !== action.payload),
+        // users: state.users.map((user) =>
+        //   user._id === action.payload ? { ...user } : user
+        // ),
         loading: false,
       };
     case ADD_USER:

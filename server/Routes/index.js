@@ -17,7 +17,7 @@ router.get("/api/user", userController.getAllUsers);
 router.get("/api/user/role", userController.getJuniors);
 router.post("/api/user", auth, userController.addJr);
 router.delete("/api/user/:id", auth, userController.deleteUser);
-router.put("/api/user/:id", auth, userController.convertToSr);
+router.put("/api/user/:id", userController.convertToSr);
 router.get("/api/user/:id", userController.getUSerByID);
 
 //Questions Routes
@@ -29,6 +29,7 @@ router.delete(
   "/api/comment/:id/:comment_id",
   questionsController.deleteComment
 );
+//router.put("/api/comment/:id/:comment_id", questionsController.approveComment);
 router.delete("/deleteQuestion/:id", auth, questionsController.deleteQuestion);
 
 //Company Routes

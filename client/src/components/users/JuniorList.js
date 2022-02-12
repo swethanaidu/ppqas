@@ -47,7 +47,7 @@ class JuniorList extends Component {
     return (
       <>
         <h3 className="main-header">Junior Users List</h3>
-        {activeUserId && (
+        {/* {activeUserId && (
           <Modal centered isOpen={this.state.modal}>
             <ModalHeader toggle={this.toggle}>
               Convert Junior to Senior Role
@@ -76,7 +76,7 @@ class JuniorList extends Component {
               </Button>
             </ModalBody>
           </Modal>
-        )}
+        )} */}
         <div className="qa-content-wrap">
           <Table>
             <thead>
@@ -103,13 +103,13 @@ class JuniorList extends Component {
                         className="update-btn"
                         color="primary"
                         size="sm"
-                        // onClick={this.onConvertorJrClick.bind(this, _id)}
-                        onClick={this.openModalWithUser.bind(
-                          this,
-                          _id,
-                          firstName,
-                          lastName
-                        )}
+                        onClick={this.onConvertorJrClick.bind(this, _id)}
+                        // onClick={this.openModalWithUser.bind(
+                        //   this,
+                        //   _id,
+                        //   firstName,
+                        //   lastName
+                        // )}
                         // onClick={this.openModalWithUser.bind(
                         //   _id,
                         //   firstName,
