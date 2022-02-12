@@ -66,7 +66,9 @@ export const addUser = (user) => (dispatch, getState) => {
           type: ADD_USER,
           payload: res.data,
         }),
-      dispatch(setAlert(`Added Junior Profile Successfully!!`, "success"))
+      dispatch(
+        setAlert(`Junior Profile has been created Successfully!!`, "success")
+      )
     )
     .catch((err) => {
       dispatch(
@@ -91,7 +93,9 @@ export const deleteUser = (id) => (dispatch, getState) => {
           type: DELETE_USER,
           payload: id,
         }),
-      dispatch(setAlert(`Deleted User Profile Successfully!!`, "success"))
+      dispatch(
+        setAlert(`User Profile has been deleted Successfully!!`, "success")
+      )
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -108,7 +112,10 @@ export const convertJrUser = (id) => (dispatch, getState) => {
           payload: id,
         }),
       dispatch(
-        setAlert(`Converted Junior to Senior Profile Successfully!!`, "success")
+        setAlert(
+          `Converted Junior Profile to Senior Profile Successfully!!`,
+          "success"
+        )
       )
     )
     .catch((err) =>

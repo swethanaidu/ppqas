@@ -51,7 +51,7 @@ export const addQuestion = (question) => (dispatch, getState) => {
           type: ADD_QUESTION,
           payload: res.data,
         }),
-      dispatch(setAlert(`Posted Question Successfully!!`, "success"))
+      dispatch(setAlert(`Question has been posted Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -68,7 +68,7 @@ export const addComment = (postId, formData) => (dispatch, getState) => {
           payload: res.data,
         }),
 
-      dispatch(setAlert(`Posted Comment Successfully!!`, "success"))
+      dispatch(setAlert(`Comment has been posted Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -84,7 +84,7 @@ export const deleteQuestion = (id) => (dispatch, getState) => {
           type: DELETE_QUESTION,
           payload: id,
         }),
-      dispatch(setAlert(`Deleted Question Successfully!!`, "success"))
+      dispatch(setAlert(`Question has been deleted Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -100,7 +100,7 @@ export const deleteComment = (id, comment_id) => (dispatch, getState) => {
           type: DELETE_COMMENT,
           payload: comment_id,
         }),
-      dispatch(setAlert(`Deleted Comment Successfully!!`, "success"))
+      dispatch(setAlert(`Comment has been deleted Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))

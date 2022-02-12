@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import Alert from "../shared/Alert";
 
 const constants = require("../../constants");
 // const API_URL = constants.API_URL;
@@ -39,11 +39,9 @@ class Register extends Component {
       //check for register error
       if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.message });
-        this.setState({ successMsg: null });
         //console.log(error.msg);
       } else {
         this.setState({ msg: null });
-        this.setState({ successMsg: "loggedIn" });
       }
     }
   }
@@ -123,6 +121,8 @@ class Register extends Component {
     return (
       <React.Fragment>
         <div className="page">
+          {this.props.auth.token ? <Alert /> : " "}
+
           <div className="container">
             <div className="row">
               <div className="col-lg-8 card-sigin-main py-4 justify-content-center mx-auto">

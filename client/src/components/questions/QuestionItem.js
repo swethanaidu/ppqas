@@ -16,7 +16,8 @@ const QuestionItem = ({
   auth,
   questionPage,
   deleteQuestion,
-  question: { _id, title, desc, Company_data, name, user_data, dop, comments }, deleteFlag
+  question: { _id, title, desc, Company_data, name, user_data, dop, comments },
+  deleteFlag,
 }) => (
   <div className="question-detial">
     <div className="media d-block ">
@@ -42,7 +43,9 @@ const QuestionItem = ({
             ) : (
               ""
             )}
-            <span className="badge bg-light ">{Company_data.name}</span>
+            {Company_data && (
+              <span className="badge bg-light ">{Company_data.name}</span>
+            )}
           </div>
         </div>
 
@@ -51,7 +54,7 @@ const QuestionItem = ({
             <Link
               to={{
                 pathname: "/dashboard/questionDetails",
-                value: _id
+                value: _id,
               }}
             >
               <Button
@@ -83,7 +86,7 @@ const QuestionItem = ({
             </Link>
           )}
           <Button
-            style={{display: !questionPage ? deleteFlag : "none"}}
+            style={{ display: !questionPage ? deleteFlag : "none" }}
             className="remove-btn"
             color="danger"
             size="sm"

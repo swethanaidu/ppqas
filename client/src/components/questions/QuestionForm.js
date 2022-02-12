@@ -24,7 +24,7 @@ class QuestionForm extends Component {
       [field]: event.target.value,
       //   loginError: undefined,
     });
-    console.log(this.state.company_id);
+    // console.log(this.state.company_id);
   };
   onSubmit = (e) => {
     e.preventDefault();

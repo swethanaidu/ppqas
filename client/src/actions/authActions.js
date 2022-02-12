@@ -32,7 +32,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
       dispatch(
         setAlert(
-          `JWT Token is expired. We are redirecting to Login Page in Few Seconds`,
+          `JWT Token is expired. We are redirecting you to Login Page in Few Seconds`,
           "danger"
         )
       );
@@ -64,11 +64,13 @@ export const register =
 
     axios
       .post("/signup", body, config)
-      .then((res) =>
-        dispatch({
-          type: REGISTER_SUCCESS,
-          payload: res.data,
-        })
+      .then(
+        (res) =>
+          dispatch({
+            type: REGISTER_SUCCESS,
+            payload: res.data,
+          }),
+        dispatch(setAlert(`Registered Successfully`, "success"))
       )
       .catch((err) => {
         dispatch(
@@ -96,11 +98,13 @@ export const login =
 
     axios
       .post("/userLogin", body, config)
-      .then((res) =>
-        dispatch({
-          type: LOGIN_SUCCESS,
-          payload: res.data,
-        })
+      .then(
+        (res) =>
+          dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data,
+          }),
+        dispatch(setAlert(`Logged In Successfully`, "success"))
       )
       .catch((err) => {
         dispatch(

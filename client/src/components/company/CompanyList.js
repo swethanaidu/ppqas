@@ -26,9 +26,9 @@ class CompanyList extends Component {
                 <th>Name</th>
                 <th>CEO</th>
                 <th>Founded</th>
-                <th>No. Of Empoyes</th>
+                <th>No. Of Employees</th>
                 <th>Locations</th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

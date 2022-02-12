@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import Alert from "../shared/Alert";
 
 const constants = require("../../constants");
 const API_URL = constants.API_URL;
@@ -31,10 +32,8 @@ class Login extends Component {
       //check for register error
       if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.message });
-        this.setState({ successMsg: null });
         //console.log(error.msg);
       } else {
-        this.setState({ successMsg: "loggedIn" });
         this.setState({ msg: null });
       }
     }
@@ -81,7 +80,7 @@ class Login extends Component {
   };
 
   render() {
-    const { password, email, msg, isAuthenticated, successMsg } = this.state;
+    const { password, email, msg, isAuthenticated } = this.state;
     //console.log(this.props.auth.token);
     if (this.props.auth.token) {
       return <Redirect to="/dashboard" />;
@@ -89,6 +88,8 @@ class Login extends Component {
     return (
       <React.Fragment>
         <div className="page">
+          {this.props.auth.token ? <Alert /> : " "}
+
           <div className="container">
             <div className="row">
               <div className="col-xl-5 col-lg-6 col-md-8 col-sm-8 col-xs-10 card-sigin-main py-4 justify-content-center mx-auto">
@@ -108,12 +109,12 @@ class Login extends Component {
                             {msg ? (
                               <div className="alert alert-danger">{msg}</div>
                             ) : null}
-                            {successMsg === "loggedIn" ? (
+                            {/* {successMsg === "loggedIn" ? (
                               <div className="alert alert-success">
                                 Logged In Successfully!!
-                                {/* <Redirect to="/dashboard" /> */}
+                                
                               </div>
-                            ) : null}
+                            ) : null} */}
 
                             <div className="mb-3">
                               <label className="form-label">Email</label>

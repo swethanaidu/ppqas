@@ -186,15 +186,15 @@ class SideNav extends Component {
                     display: this.authoriseModule("APPROVE_ANSWER", user?.role),
                   }}
                 >
-                  <NavLink
+                  {/* <NavLink
                     tag={RRNavLink}
                     activeClassName="active"
                     exact
                     to="/dashboard"
                   >
                     <BiCommentCheck />
-                    Approve Awsners
-                  </NavLink>
+                    Approve Answers
+                  </NavLink> */}
                 </NavItem>
               </Nav>
             </div>

@@ -35,7 +35,7 @@ export const addCompany = (company) => (dispatch, getState) => {
           type: ADD_COMPANY,
           payload: res.data,
         }),
-      dispatch(setAlert(`Added Company Successfully!!`, "success"))
+      dispatch(setAlert(`Company has been added Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(
@@ -56,7 +56,7 @@ export const deleteCompany = (id) => (dispatch, getState) => {
           type: DELETE_COMPANY,
           payload: id,
         }),
-      dispatch(setAlert(`Delete Company Successfully!!`, "success"))
+      dispatch(setAlert(`Company has been deleted Successfully!!`, "success"))
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
