@@ -25,7 +25,7 @@ class SideNav extends Component {
     auth: PropTypes.object.isRequired,
   };
 
-  autoriseModule = (module, role) => {
+  authoriseModule = (module, role) => {
     switch (module) {
       case "ADD_COMPANY":
       case "VIEW_COMPANY":
@@ -77,7 +77,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("ADD_COMPANY", user?.role),
+                    display: this.authoriseModule("ADD_COMPANY", user?.role),
                   }}
                 >
                   <NavLink
@@ -92,7 +92,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("VIEW_COMPANY", user?.role),
+                    display: this.authoriseModule("VIEW_COMPANY", user?.role),
                   }}
                 >
                   <NavLink
@@ -108,7 +108,7 @@ class SideNav extends Component {
 
                 <NavItem
                   style={{
-                    display: this.autoriseModule("CREATE_JUNIOR", user?.role),
+                    display: this.authoriseModule("CREATE_JUNIOR", user?.role),
                   }}
                 >
                   <NavLink
@@ -123,7 +123,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("USER_LIST", user?.role),
+                    display: this.authoriseModule("USER_LIST", user?.role),
                   }}
                 >
                   <NavLink
@@ -138,7 +138,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("CONVERT_JR_SR", user?.role),
+                    display: this.authoriseModule("CONVERT_JR_SR", user?.role),
                   }}
                 >
                   <NavLink
@@ -153,7 +153,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("POST_QUESTION", user?.role),
+                    display: this.authoriseModule("POST_QUESTION", user?.role),
                   }}
                 >
                   <NavLink
@@ -168,7 +168,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("VIEW_QUESTION", user?.role),
+                    display: this.authoriseModule("VIEW_QUESTION", user?.role),
                   }}
                 >
                   <NavLink
@@ -183,7 +183,7 @@ class SideNav extends Component {
                 </NavItem>
                 <NavItem
                   style={{
-                    display: this.autoriseModule("APPROVE_ANSWER", user?.role),
+                    display: this.authoriseModule("APPROVE_ANSWER", user?.role),
                   }}
                 >
                   <NavLink
