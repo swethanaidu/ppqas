@@ -50,6 +50,7 @@ class CompanyForm extends Component {
         validationMsg: "Kindly provide all mandatory fields to proceed...",
       });
     } else {
+      this.setState({ validationMsg: "" });
       const newCompany = {
         name: this.state.name,
         ceo: this.state.ceo,
