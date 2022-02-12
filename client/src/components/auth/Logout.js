@@ -1,40 +1,39 @@
 import React, { Component, Fragment } from "react";
-import { NavLink, Modal, ModalHeader, ModalBody, Button } from "reactstrap";
+import { NavLink } from "reactstrap";
 import { connect } from "react-redux";
 import { logout } from "../../actions/authActions";
 import PropTypes from "prop-types";
-import { BsExclamationTriangle } from "react-icons/bs";
-import { Redirect } from "react-router-dom";
-// import { ILogoutProps } from '../../types/interfaces';
+// import { BsExclamationTriangle } from "react-icons/bs";
+// import { Redirect } from "react-router-dom";
 
 export class Logout extends Component {
-  state = {
-    modal: true,
-  };
+  // state = {
+  //   modal: true,
+  // };
   static propTypes = {
     logout: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
   };
-  toggle = () => {
-    this.setState({
-      modal: !this.state.modal,
-    });
-  };
+  // toggle = () => {
+  //   this.setState({
+  //     modal: !this.state.modal,
+  //   });
+  // };
   componentDidMount() {
     // if (localStorage.getItem("token") === null) {
     //   window.location.href = "/login";
     // }
   }
   handleLogout = () => {
-    const { isAuthenticated, user, token } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     this.props.logout();
-    if (!isAuthenticated) {
-      // <Redirect to="/login" />;
-      window.location.href = "/login";
-    }
+    // if (!isAuthenticated) {
+    // <Redirect to="/login" />;
+    window.location.href = "/login";
+    // }
   };
   render() {
-    const { isAuthenticated, user, token } = this.props.auth;
+    // const { isAuthenticated, user, token } = this.props.auth;
     // const currentJWT = token;
     // function getPayload(jwt) {
     //   // A JWT has 3 parts separated by '.'
@@ -63,7 +62,7 @@ export class Logout extends Component {
     // }
     return (
       <Fragment>
-        {!isAuthenticated && (
+        {/* {!isAuthenticated && (
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
@@ -84,7 +83,7 @@ export class Logout extends Component {
               </Button>
             </ModalBody>
           </Modal>
-        )}
+        )} */}
         <NavLink onClick={this.handleLogout} href="#">
           Logout
         </NavLink>

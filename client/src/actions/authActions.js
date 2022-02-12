@@ -10,7 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
 } from "./types";
-// import { IAuthFunction, IConfigHeaders } from '../../types/interfaces';
+import { setAlert } from "./alert";
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -30,6 +30,12 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch({
         type: AUTH_ERROR,
       });
+      dispatch(
+        setAlert(
+          `JWT Token is expired. We are redirecting to Login Page in Few Seconds`,
+          "danger"
+        )
+      );
     });
 };
 

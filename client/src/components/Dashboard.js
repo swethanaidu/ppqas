@@ -11,8 +11,6 @@ export default class Dashboard extends Component {
     store.dispatch(loadUser());
   }
   render() {
-    // const { isLoggedIn, user } = this.state;
-
     return (
       <Provider store={store}>
         <div className="qa">
