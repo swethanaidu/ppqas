@@ -16,7 +16,7 @@ const QuestionItem = ({
   auth,
   questionPage,
   deleteQuestion,
-  question: { _id, title, desc, Company_data, name, user_data, dop, comments },
+  question: { _id, title, desc, Company_data, name, user_data, dop, comments }, deleteFlag
 }) => (
   <div className="question-detial">
     <div className="media d-block ">
@@ -51,7 +51,7 @@ const QuestionItem = ({
             <Link
               to={{
                 pathname: "/dashboard/questionDetails",
-                value: _id,
+                value: _id
               }}
             >
               <Button
@@ -83,13 +83,14 @@ const QuestionItem = ({
             </Link>
           )}
           <Button
+            style={{display: !questionPage ? deleteFlag : "none"}}
             className="remove-btn"
             color="danger"
             size="sm"
             id="TooltipExample"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
-            title="Delete Question"
+            title="Delete Question zzzzz"
             onClick={() => deleteQuestion(_id)}
           >
             <FiTrash2 />
