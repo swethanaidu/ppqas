@@ -3,35 +3,37 @@
 Terminal 1
 ---------
 * To Create New Server Project 
-  - mkdir server
-  - cd server
-  - touch index.js
-  - npm i express nodemon cors
-
-* For First Time Setup 
-  - Update "package.json" (server/package.json)
-  - add "start": "nodemon index.js" under scripts tag
-
-* To run the server
-  - cd server
-  - npm start
-
-* To run the server in debug mode
-  - cd server
-  - ???
+   - cd server
+   - npm i express nodemon cors
+   - npm i express body-parser mongoose concurrently
+   - npm i -D nodemon
+   - npm i jsonwebtoken
+   - npm i bcryptjs config
+   - 
+ * To run the server  
+   - npm start server // to run nodemon server
+   - npm start client // to run client - reactjs
+   - npm start dev // to run concurrently both (nodemon server) & (client - reactjs)
 
 Terminal 2
 ---------
 * To Create New Client Project
-  - npx create-react-app client
-  - cd client
-  - npm install react-router-dom bootstrap
+  - cd client 
+  - npm i react-router-dom bootstrap
   - npm install -s node-sass
+  - npm install  react-bootstrap  --save 
+  - npm install reactstrap react-transition-group
+  - npm i uuid 
+  - npm i redux react-redux redux-thunk
+  - npm install react-icons --save
+  - npm install date-fns
+  - npm install http-server
+  - npm i -D --save-exact mini-css-extract-plugin@2.4.5
 
 * To run the client
-  - cd client
-  - npm start
+   - npm start
 
-* To run the client in debug mode
-  - cd client
-  - ???
+
+
+
+Production Link : "http://ppqas.herokuapp.com"
